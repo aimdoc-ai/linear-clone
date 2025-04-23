@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import { Providers } from "./Providers";
 import "../globals.css";
 import "../liveblocks.css";
+import { TaskDefinition } from "@doable.sh/sdk";
 
 export const metadata: Metadata = {
   title: "Liveblocks",
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             />
           </picture>
         </a>
+        <TaskDefinition id="create-issue" name="Create Issue" description="Create a new issue or new task or new work item in the project" steps={["Click the button to create a new issue button in navigation (to the right of Acme Inc)", "Fill in the issue details in the issue detail area", "Add labels to the issue", "Add a description to the issue", "Add a due date to the issue", "Add a priority to the issue", "Add a status to the issue", "Add a assignee to the issue", "Add a comment."]} />
       </body>
     </html>
   );

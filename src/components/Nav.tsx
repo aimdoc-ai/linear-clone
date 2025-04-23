@@ -40,6 +40,11 @@ export function Nav() {
           }}
           className="bg-white rounded-lg p-1.5 shadow-sm border border-neutral-200 text"
         >
+          <ComponentContext
+            description="Button to create a new issue, new task, new work item. This is main button to create a new item in the project. Only use this button to create a new item in the project - no other button will work except this one."
+            name="Create Issue Button"
+            path="/"
+          />
           <CreateIcon className="w-4 h-4" />
         </button>
       </div>
