@@ -4,6 +4,7 @@ import classnames from "classnames";
 import { ChevronUpIcon } from "@/icons/ChevronUpIcon";
 import { ChevronDownIcon } from "@/icons/ChevronDownIcon";
 import { CheckIcon } from "@/icons/CheckIcon";
+import { ComponentContext } from "@doable.sh/sdk";
 
 type Props = {
   id: string;
@@ -36,6 +37,10 @@ export function Select({
       >
         {current ? current.text || current.jsx : <RadixSelect.Value />}
       </RadixSelect.Trigger>
+      <ComponentContext 
+        description="Reusable dropdown select component used throughout the application"
+        name="Select Dropdown"
+      />
       <RadixSelect.Portal>
         <RadixSelect.Content
           className="overflow-hidden bg-white rounded-lg border border-neutral-200 shadow relative right-full -top-8 -mt-0.5 mr-1"

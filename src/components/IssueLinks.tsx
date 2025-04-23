@@ -13,6 +13,7 @@ import { DeleteIcon } from "@/icons/DeleteIcon";
 import { PlusIcon } from "@/icons/PlusIcon";
 import { SubmitIcon } from "@/icons/SubmitIcon";
 import { ImmutableStorage } from "@/liveblocks.config";
+import { ComponentContext } from "@doable.sh/sdk";
 
 export function IssueLinks({
   storageFallback,
@@ -36,7 +37,11 @@ export function IssueLinks({
         </div>
       }
     >
-      <Links />
+      <ComponentContext 
+        description="Section for adding and managing links related to the issue"
+        name="Issue Links Section"
+      />
+        <Links />
     </ClientSideSuspense>
   );
 }

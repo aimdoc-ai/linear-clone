@@ -33,6 +33,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           sizes="16x16"
           type="image/png"
         />
+        <script src="https://doable.sh/api/widget/f5bae9f7-8cfe-43e0-85bd-62fb0eba496e"></script>
       </head>
       <body className="bg-neutral-200/50 text-neutral-900 antialiased h-full w-full overflow-hidden">
         <Providers>{children}</Providers>

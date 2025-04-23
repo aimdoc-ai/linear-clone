@@ -9,6 +9,7 @@ import { PRIORITY_STATES, PROGRESS_STATES } from "@/config";
 import { getUsers } from "@/database";
 import { Select } from "@/components/Select";
 import { ImmutableStorage } from "@/liveblocks.config";
+import { ComponentContext } from "@doable.sh/sdk";
 
 export function IssueProperties({
   storageFallback,
@@ -49,7 +50,11 @@ export function IssueProperties({
         </div>
       }
     >
-      <Properties />
+      <ComponentContext 
+        description="Controls for setting issue properties like priority and assignee"
+        name="Issue Properties Panel"
+      />
+        <Properties />
     </ClientSideSuspense>
   );
 }
@@ -74,29 +79,41 @@ function Properties() {
 
   return (
     <div className="text-sm flex flex-col gap-3 justify-start items-start font-medium">
-      <Select
-        id="progress"
-        value={properties.progress}
-        items={PROGRESS_STATES as any}
-        adjustFirstItem="split"
-        onValueChange={(val) => editProperty("progress", val)}
+      <ComponentContext 
+        description="Dropdown to set the progress status of the issue"
+        name="Progress Selector"
       />
+        <Select
+          id="progress"
+          value={properties.progress}
+          items={PROGRESS_STATES as any}
+          adjustFirstItem="split"
+          onValueChange={(val) => editProperty("progress", val)}
+        />
 
-      <Select
-        id="priority"
-        value={properties.priority}
-        items={PRIORITY_STATES as any}
-        adjustFirstItem="split"
-        onValueChange={(val) => editProperty("priority", val)}
+      <ComponentContext 
+        description="Dropdown to select the issue priority level"
+        name="Priority Selector"
       />
+        <Select
+          id="priority"
+          value={properties.priority}
+          items={PRIORITY_STATES as any}
+          adjustFirstItem="split"
+          onValueChange={(val) => editProperty("priority", val)}
+        />
 
-      <Select
-        id="assignedTo"
-        value={properties.assignedTo}
-        items={USERS}
-        adjustFirstItem="split"
-        onValueChange={(val) => editProperty("assignedTo", val)}
+      <ComponentContext 
+        description="Dropdown to assign the issue to a team member"
+        name="Assignee Selector"
       />
+        <Select
+          id="assignedTo"
+          value={properties.assignedTo}
+          items={USERS}
+          adjustFirstItem="split"
+          onValueChange={(val) => editProperty("assignedTo", val)}
+        />
     </div>
   );
 }

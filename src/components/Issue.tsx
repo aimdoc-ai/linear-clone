@@ -15,6 +15,7 @@ import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 import Link from "next/link";
 import { Status } from "./Status";
+import { ComponentContext } from "@doable.sh/sdk";
 
 export async function Issue({ issueId }: { issueId: string }) {
   const roomId = getRoomId(issueId);
@@ -96,6 +97,14 @@ export async function Issue({ issueId }: { issueId: string }) {
           <div className="flex-grow h-full overflow-y-scroll">
             <div className="max-w-[840px] mx-auto py-6 relative">
               <div className="px-12">
+                <ComponentContext
+                  description="The title of the issue that users can view and edit"
+                  name="Issue Title"
+                />
+                <ComponentContext
+                  description="The main content editor for the issue description"
+                  name="Issue Description Editor"
+                />
                 <Editor
                   storageFallback={storage}
                   contentFallback={
@@ -104,6 +113,11 @@ export async function Issue({ issueId }: { issueId: string }) {
                 />
                 <div className="my-6">
                   <IssueLinks storageFallback={storage} />
+                  <ComponentContext
+                    description="This is the issue links area"
+                    name="Issue Links"
+                    path={`/issue/${issueId}`}
+                  />
                 </div>
                 <div className="border-t my-6" />
                 <Comments />
@@ -116,6 +130,11 @@ export async function Issue({ issueId }: { issueId: string }) {
                 Properties
               </div>
               <IssueProperties storageFallback={storage} />
+              <ComponentContext
+                description="This is the issue properties area"
+                name="Issue Properties"
+                path={`/issue/${issueId}`}
+              />
             </div>
 
             <div>
@@ -123,6 +142,11 @@ export async function Issue({ issueId }: { issueId: string }) {
                 Labels
               </div>
               <IssueLabels storageFallback={storage} />
+              <ComponentContext
+                description="This is the issue labels area"
+                name="Issue Labels"
+                path={`/issue/${issueId}`}
+              />
             </div>
 
             <div>
@@ -130,6 +154,11 @@ export async function Issue({ issueId }: { issueId: string }) {
                 Actions
               </div>
               <IssueActions issueId={issueId} />
+              <ComponentContext
+                description="This is the issue actions area"
+                name="Issue Actions"
+                path={`/issue/${issueId}`}
+              />
             </div>
           </div>
         </div>

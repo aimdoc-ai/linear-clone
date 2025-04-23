@@ -4,6 +4,7 @@ import { deleteRoom } from "@/actions/liveblocks";
 import { getRoomId } from "@/config";
 import { useState } from "react";
 import { Loading } from "@/components/Loading";
+import { ComponentContext } from "@doable.sh/sdk";
 
 export function IssueActions({ issueId }: { issueId: string }) {
   const [deleting, setDeleting] = useState(false);
@@ -24,6 +25,10 @@ export function IssueActions({ issueId }: { issueId: string }) {
       >
         Delete issue
       </button>
+      <ComponentContext
+        description="Button to delete the current issue"
+        name="Delete Issue Button"
+      />
     </>
   );
 }

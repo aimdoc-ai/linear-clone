@@ -5,6 +5,7 @@ import { LiveList, LiveObject } from "@liveblocks/client";
 import { useSearchParams } from "next/navigation";
 import { ReactNode, useMemo } from "react";
 import { getRoomId } from "@/config";
+import { ComponentContext } from "@doable.sh/sdk";
 
 export function Room({
   children,
@@ -16,21 +17,25 @@ export function Room({
   const roomId = useExampleRoomId(getRoomId(issueId));
 
   return (
-    <RoomProvider
-      id={roomId}
-      initialStorage={{
-        meta: new LiveObject({ title: "Untitled issue" }),
-        properties: new LiveObject({
-          progress: "none",
-          priority: "none",
-          assignedTo: "none",
-        }),
-        labels: new LiveList([]),
-        links: new LiveList([]),
-      }}
-    >
-      {children}
-    </RoomProvider>
+      <RoomProvider
+        id={roomId}
+        initialStorage={{
+          meta: new LiveObject({ title: "Untitled issue" }),
+          properties: new LiveObject({
+            progress: "none",
+            priority: "none",
+            assignedTo: "none",
+          }),
+          labels: new LiveList([]),
+          links: new LiveList([]),
+        }}
+      >
+        {children}
+        <ComponentContext 
+      description="Collaborative room where multiple users can work on issues together"
+      name="Collaboration Room"
+    />
+      </RoomProvider>
   );
 }
 

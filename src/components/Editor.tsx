@@ -21,6 +21,7 @@ import { CodeNode } from "@lexical/code";
 import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { ImmutableStorage } from "@/liveblocks.config";
 import { EditorFloatingToolbar } from "./EditorFloatingToolbar";
+import { ComponentContext } from "@doable.sh/sdk";
 
 // Wrap your Lexical config with `liveblocksConfig`
 const initialConfig = liveblocksConfig({
@@ -57,45 +58,49 @@ export function Editor({
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <div className="">
-        <div className="my-6">
-          <ClientSideSuspense
-            fallback={
-              <div className="block w-full text-2xl font-bold my-6">
-                {storageFallback.meta.title}
-              </div>
-            }
-          >
-            <EditorTitle />
-          </ClientSideSuspense>
-        </div>
-        <div className="relative">
-          <LiveblocksPlugin>
-            {!ready ? (
-              <div className="select-none cursor-wait editor-styles">
-                {contentFallback}
-              </div>
-            ) : (
-              <RichTextPlugin
-                contentEditable={
-                  <ContentEditable className="outline-none editor-styles" />
-                }
-                placeholder={
-                  <div className="absolute top-0 left-0 pointer-events-none text-neutral-500 whitespace-nowrap">
-                    Start typing here…
-                  </div>
-                }
-                ErrorBoundary={LexicalErrorBoundary}
-              />
-            )}
-            <ClientSideSuspense fallback={null}>
-              <TextEditorThreads />
+      <ComponentContext 
+        description="Rich text editor for creating and editing issue content"
+        name="Rich Text Editor"
+      />
+        <div className="">
+          <div className="my-6">
+            <ClientSideSuspense
+              fallback={
+                <div className="block w-full text-2xl font-bold my-6">
+                  {storageFallback.meta.title}
+                </div>
+              }
+            >
+              <EditorTitle />
             </ClientSideSuspense>
-            <FloatingComposer />
-            <EditorFloatingToolbar />
-          </LiveblocksPlugin>
+          </div>
+          <div className="relative">
+            <LiveblocksPlugin>
+              {!ready ? (
+                <div className="select-none cursor-wait editor-styles">
+                  {contentFallback}
+                </div>
+              ) : (
+                <RichTextPlugin
+                  contentEditable={
+                    <ContentEditable className="outline-none editor-styles" />
+                  }
+                  placeholder={
+                    <div className="absolute top-0 left-0 pointer-events-none text-neutral-500 whitespace-nowrap">
+                      Start typing here…
+                    </div>
+                  }
+                  ErrorBoundary={LexicalErrorBoundary}
+                />
+              )}
+              <ClientSideSuspense fallback={null}>
+                <TextEditorThreads />
+              </ClientSideSuspense>
+              <FloatingComposer />
+              <EditorFloatingToolbar />
+            </LiveblocksPlugin>
+          </div>
         </div>
-      </div>
     </LexicalComposer>
   );
 }
@@ -105,3 +110,8 @@ function TextEditorThreads() {
 
   return <FloatingThreads threads={threads} />;
 }
+
+<ComponentContext 
+  description="Toolbar for formatting text in the editor"
+  name="Editor Toolbar"
+/>

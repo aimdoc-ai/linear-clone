@@ -7,6 +7,7 @@ import { ProgressInProgressIcon } from "@/icons/ProgressInProgressIcon";
 import { ProgressTodoIcon } from "@/icons/ProgressTodoIcon";
 import { ProgressDoneIcon } from "@/icons/ProgressDoneIcon";
 import Link from "next/link";
+import { ComponentContext, UserContext } from "@doable.sh/sdk";
 
 export function IssuesList({
   initialRooms,
@@ -108,18 +109,26 @@ export async function Row({ room }: { room: RoomWithMetadata }) {
         <div className="flex gap-2 items-center">
           {LABELS.filter((label) => labels.includes(label.id)).map(
             ({ id, text }) => (
-              <div
-                key={id}
-                className="text-sm rounded-full px-2 py-0.5 border shadow-xs flex items-center gap-1.5 select-none text-neutral-700"
+                <div
+                  className="text-sm rounded-full px-2 py-0.5 border shadow-xs flex items-center gap-1.5 select-none text-neutral-700"
               >
                 <div className="bg-neutral-400/60 rounded-full w-2 h-2" />
                 {text}{" "}
+                <ComponentContext
+                description={`Label for the issue: ${text} (${id})`}
+                name="Issue Label"
+              />
               </div>
             )
           )}
         </div>
         <div className="flex-none w-12 text-right text-xs">{date}</div>
         <div>
+          <UserContext
+            description="User avatar for the assigned user"
+            name="User Avatar"
+            id={assignedUser?.info.name ?? assignedUser?.id ?? "none"}
+          />
           {assignedUser ? (
             <img
               className="w-6 h-6 rounded-full overflow-hidden"

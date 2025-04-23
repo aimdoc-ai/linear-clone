@@ -9,6 +9,7 @@ import { LABELS } from "@/config";
 import { Select } from "@/components/Select";
 import { PlusIcon } from "@/icons/PlusIcon";
 import { ImmutableStorage } from "@/liveblocks.config";
+import { ComponentContext } from "@doable.sh/sdk";
 
 export function IssueLabels({
   storageFallback,
@@ -36,6 +37,10 @@ export function IssueLabels({
         </div>
       }
     >
+      <ComponentContext
+        description="The labels we can add to the issue are set here. It's a dropdown with the labels and a plus icon to add a new label."
+        name="Issue Labels"
+      />
       <Labels />
     </ClientSideSuspense>
   );
@@ -68,31 +73,39 @@ function Labels() {
           >
             <div className="bg-neutral-400/60 rounded-full w-2 h-2" />
             {text}{" "}
-            <button
-              className="text-base leading-none pb-0.5 text-neutral-400"
-              onClick={() => removeLabel(id)}
-            >
-              ×
-            </button>
+            <ComponentContext
+              description={`Remove the "${text}" label from this issue`}
+              name="Remove Label Button"
+            />
+              <button
+                className="text-base leading-none pb-0.5 text-neutral-400"
+                onClick={() => removeLabel(id)}
+              >
+                ×
+              </button>
           </div>
         )
       )}
       <div className="overflow-hidden bg-transparent rounded-full transition-colors h-[26px]">
-        <Select
-          id="add1-label"
-          value={"add"}
-          items={[
-            {
-              id: "add",
-              jsx: <PlusIcon className="w-4 h-4 -mt-0.5" />,
-            },
-            ...LABEL_LIST,
-          ]}
-          adjustFirstItem="hide"
-          onValueChange={(value) => {
-            addLabel(value);
-          }}
+        <ComponentContext
+          description="Dropdown menu to add a new label to the issue. Click the plus icon to see available labels. Labels options are: bug, feature, engineering, design, and/or product."
+          name="Add Label Dropdown"
         />
+          <Select
+            id="add1-label"
+            value={"add"}
+            items={[
+              {
+                id: "add",
+                jsx: <PlusIcon className="w-4 h-4 -mt-0.5" />,
+              },
+              ...LABEL_LIST,
+            ]}
+            adjustFirstItem="hide"
+            onValueChange={(value) => {
+              addLabel(value);
+            }}
+          />
       </div>
     </div>
   );

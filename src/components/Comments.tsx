@@ -4,6 +4,7 @@ import { useThreads, ClientSideSuspense } from "@liveblocks/react/suspense";
 import { ThreadData } from "@liveblocks/client";
 import { Composer, Thread } from "@liveblocks/react-ui";
 import { useState } from "react";
+import { ComponentContext } from "@doable.sh/sdk";
 
 export function Comments() {
   return (
@@ -19,6 +20,14 @@ export function Comments() {
         <ThreadList />
         <Composer className="border border-neutral-200 !my-4 rounded-lg overflow-hidden shadow-sm bg-white" />
       </ClientSideSuspense>
+      <ComponentContext 
+        description="Comment section where users can discuss the issue"
+        name="Issue Comments"
+      />
+      <ComponentContext 
+        description="Input field for adding new comments to the issue"
+        name="Comment Input"
+      />
     </>
   );
 }

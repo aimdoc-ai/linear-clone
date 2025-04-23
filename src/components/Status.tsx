@@ -3,6 +3,7 @@
 import { useSyncStatus } from "@liveblocks/react/suspense";
 import { SyncCompleteIcon } from "@/icons/SyncCompleteIcon";
 import { SyncSpinnerIcon } from "@/icons/SyncSpinnerIcon";
+import { ComponentContext } from "@doable.sh/sdk";
 
 export function Status() {
   const status = useSyncStatus({ smooth: true });
@@ -13,6 +14,10 @@ export function Status() {
       ) : (
         <SyncCompleteIcon className="w-5 h-5 opacity-80" />
       )}
+      <ComponentContext 
+        description="Displays and allows changing the current status of the issue"
+        name="Issue Status"
+      />
     </div>
   );
 }

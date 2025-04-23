@@ -15,6 +15,7 @@ import { ComponentProps, useState } from "react";
 import { Loading } from "@/components/Loading";
 import { ProgressInProgressIcon } from "@/icons/ProgressInProgressIcon";
 import { MyIssuesIcon } from "@/icons/MyIssuesIcon";
+import { ComponentContext } from "@doable.sh/sdk";
 
 export function Nav() {
   const { isOpen, toggleInbox } = useInbox();

@@ -5,6 +5,7 @@ import {
   useSelf,
   ClientSideSuspense,
 } from "@liveblocks/react/suspense";
+import { ComponentContext } from "@doable.sh/sdk";
 
 export function Presence() {
   return (
@@ -13,7 +14,11 @@ export function Presence() {
         <div className="w-7 h-7 bg-neutral-100 aniamte-pulse rounded-full" />
       }
     >
-      <Avatars />
+      <ComponentContext 
+        description="Shows which users are currently active in the issue"
+        name="User Presence Indicator"
+      />
+        <Avatars />
     </ClientSideSuspense>
   );
 }

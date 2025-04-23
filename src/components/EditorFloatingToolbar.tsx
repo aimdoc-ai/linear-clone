@@ -1,4 +1,5 @@
 import { FloatingToolbar, Toolbar } from "@liveblocks/react-lexical";
+import { ComponentContext } from "@doable.sh/sdk";
 
 export function EditorFloatingToolbar() {
   // Toolbar with custom styling in each block select item, e.g. "Heading 1" is larger
@@ -6,6 +7,10 @@ export function EditorFloatingToolbar() {
   // return <FloatingToolbar />
   return (
     <FloatingToolbar>
+      <ComponentContext 
+        description="Formatting toolbar that appears when text is selected in the editor"
+        name="Floating Formatting Toolbar"
+      />
       <Toolbar.BlockSelector
         items={(defaultItems) =>
           defaultItems.map((item) => {

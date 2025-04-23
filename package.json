@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@doable.sh/sdk": "^1.0.0",
     "@lexical/react": "^0.24.0",
     "@liveblocks/client": "^2.22.1",
     "@liveblocks/node": "^2.22.1",
